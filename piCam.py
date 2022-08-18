@@ -8,7 +8,7 @@ i = 0
 try:
     while True:
         sleep(5)
-        name = '/home/pi/TRC3000/images/pic{}'.format(i)
+        name = "/home/pi/TRC3000/images/pic{}".format(str(i))
         camera.capture(name)
         i += 1
 except KeyboardInterrupt:
