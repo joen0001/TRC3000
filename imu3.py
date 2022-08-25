@@ -1,5 +1,5 @@
 from mpu6050 import mpu6050
-import time, math
+import time
 mpu = mpu6050(0x68)
 
 while True:
@@ -7,9 +7,9 @@ while True:
     print()
 
     accel_data = mpu.get_accel_data()
-    print("Acceleration: X:"+str(math.floor(accel_data['x']))+ ", Y:"+str(math.floor(accel_data['y'])) + ", Z:" +str(math.floor(accel_data['z']+12)))
+    print("Acceleration: X:"+"{:.3f}".format(accel_data['x'])+ ", Y:"+"{:.3f}".format(accel_data['y']) + ", Z:" +"{:.3f}".format(accel_data['z']+12) )
 
     gyro_data = mpu.get_gyro_data()
-    print("Gyroscope: X:"+str(math.floor(gyro_data['x']))+ ", Y:"+str(math.floor(gyro_data['y'])) + ", Z:" +str(math.floor(gyro_data['z'])))
+    print("Gyroscope: X:"+"{:.3f}".format(gyro_data['x'])+ ", Y:"+"{:.3f}".format(gyro_data['y']) + ", Z:" +"{:.3f}".format(gyro_data['z']))
     print("-------------------------------")
     time.sleep(1)
