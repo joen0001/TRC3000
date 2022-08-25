@@ -78,11 +78,13 @@ def CameraCapture():
 # Body
 try:
     Initialisation()
+    print('1')
     while input != 'Y':
         input = input("Enter Y when sample has been loaded")
     print("Sample weighs: " + MeasureWeight() + "g")
     print("Starting Process")
     while True:
+        print('2')
         #if CheckIMU() == 1:
         #    print("Process Stopped: Excessive movement has been detected")
         #    break
