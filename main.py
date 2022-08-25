@@ -9,6 +9,7 @@ from hx711 import HX711
 # Runs servo movement and corresponding camera
 # Look at parallel running of IMU code
 
+input = ''
 # Servo Setup
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
@@ -19,6 +20,7 @@ referenceUnit = 210.05
 hx = HX711(29, 31)
 hx.set_reading_format("MSB", "MSB")
 hx.set_reference_unit(referenceUnit)
+weight = 0
 # IMU Setup
 mpu = mpu6050(0x68)
 # Camera Setup
@@ -58,7 +60,16 @@ def PrintIMU():
 
     gyro_data = mpu.get_gyro_data()
     print("Gyroscope: X:"+"{:.3f}".format(gyro_data['x'])+ ", Y:"+"{:.3f}".format(gyro_data['y']) + ", Z:" +"{:.3f}".format(gyro_data['z']))
-    print("-------------------------------")
+
+def CheckIMU():
+    gyro_data = mpu.get_gyro_data()
+    accel_data = mpu.get_gyro_data()
+    if accel_data['x'] or accel_data['y'] or accel_data['z'] >= 30:
+        return 1
+    if gyro_data['x'] or gyro_data['y'] or gyro_data['z'] >= 30:
+        return 1
+    else:
+        return 0
 
 def CameraCapture():
     name = "/home/pi/TRC3000/images/pic"+str(image)+".jpg"
@@ -67,9 +78,14 @@ def CameraCapture():
 # Body
 try:
     Initialisation()
-    MeasureWeight()
+    while input != 'Y':
+        input("Enter Y when sample has been loaded")
+    print("Sample weighs: " + MeasureWeight() + "g")
+    print("Starting Process")
     while True:
-        PrintIMU()
+        if CheckIMU():
+            print("Process Stopped: Excessive movement has been detected")
+            break
         if angle % 30 == 0:
             SetAngle(angle)
             CameraCapture()
@@ -78,4 +94,4 @@ try:
         angle += 3
         sleep(0.1)
 except:
-    print('Force Stopped')
+    print('Process Stopped')
