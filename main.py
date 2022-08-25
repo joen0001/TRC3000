@@ -16,7 +16,7 @@ pwm=GPIO.PWM(11, 50)
 angle = 0
 # Load Cell Setup
 referenceUnit = 210.05
-hx = HX711(5, 6)
+hx = HX711(29, 31)
 hx.set_reading_format("MSB", "MSB")
 hx.set_reference_unit(referenceUnit)
 # IMU Setup
