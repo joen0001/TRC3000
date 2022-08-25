@@ -77,15 +77,15 @@ def CameraCapture():
 
 # Body
 try:
-    Initialisation()
+    #Initialisation()
     #while input != 'Y':
     #    input = input("Enter Y when sample has been loaded")
     print("Sample weighs: " + MeasureWeight() + "g")
     print("Starting Process")
     while True:
-        if CheckIMU() == 1:
-            print("Process Stopped: Excessive movement has been detected")
-            break
+        #if CheckIMU() == 1:
+        #    print("Process Stopped: Excessive movement has been detected")
+        #    break
         if angle % 30 == 0:
             SetAngle(angle)
             CameraCapture()
