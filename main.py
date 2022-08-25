@@ -83,7 +83,7 @@ try:
     print("Sample weighs: " + MeasureWeight() + "g")
     print("Starting Process")
     while True:
-        if CheckIMU():
+        if CheckIMU() == 1:
             print("Process Stopped: Excessive movement has been detected")
             break
         if angle % 30 == 0:
