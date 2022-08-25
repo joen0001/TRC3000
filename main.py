@@ -79,7 +79,7 @@ def CameraCapture():
 try:
     Initialisation()
     while input != 'Y':
-        input("Enter Y when sample has been loaded")
+        input = input("Enter Y when sample has been loaded")
     print("Sample weighs: " + MeasureWeight() + "g")
     print("Starting Process")
     while True:
