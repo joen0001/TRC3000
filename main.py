@@ -63,11 +63,9 @@ def PrintIMU():
 def CheckIMU():
     gyro_data = mpu.get_gyro_data()
     accel_data = mpu.get_gyro_data()
-    #if accel_data['x'] or accel_data['y'] or accel_data['z'] >= 10000:
-    #    return 1
-    if accel_data['x'] or accel_data['y'] or accel_data['z'] >= 10000:
+    if (accel_data['x'] or accel_data['y'] or accel_data['z']) >= 10000:
         return 1
-    if gyro_data['x'] or gyro_data['y'] or gyro_data['z'] >= 10000:
+    if (gyro_data['x'] or gyro_data['y'] or gyro_data['z']) >= 10000:
         return 1
     else:
         return 0
