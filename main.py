@@ -9,7 +9,6 @@ from hx711 import HX711
 # Runs servo movement and corresponding camera
 # Look at parallel running of IMU code
 
-input = 'N'
 # Servo Setup
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
@@ -78,6 +77,7 @@ def CameraCapture():
 # Body
 try:
     Initialisation()
+    input = input("Enter Y when sample has been loaded")
     while input != 'Y':
         input = input("Enter Y when sample has been loaded")
     print("Sample weighs: " + str(MeasureWeight()) + "g")
