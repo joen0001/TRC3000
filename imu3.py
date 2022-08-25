@@ -3,9 +3,8 @@ import time
 mpu = mpu6050(0x68)
 
 while True:
-    print("Temp : "+str(mpu.get_temp()))
-    print()
-
+    print("Temp : "+"{:.3f}".format(mpu.get_temp()))
+    
     accel_data = mpu.get_accel_data()
     print("Acceleration: X:"+"{:.3f}".format(accel_data['x'])+ ", Y:"+"{:.3f}".format(accel_data['y']) + ", Z:" +"{:.3f}".format(accel_data['z']+12) )
 
