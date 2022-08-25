@@ -9,7 +9,7 @@ from hx711 import HX711
 # Runs servo movement and corresponding camera
 # Look at parallel running of IMU code
 
-input = ''
+input = 'N'
 # Servo Setup
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
