@@ -35,7 +35,7 @@ def Initialisation():
     # Load Cell Setup
     hx.reset()
     hx.tare()
-    print("Tare done. Ready for flask")
+    print("Servo Set to position 0\nTare done. Ready for flask")
 
 def SetAngle(angle):
 	duty = angle/18 + 2.5
@@ -74,12 +74,12 @@ def CameraCapture():
     name = "/home/pi/TRC3000/images/pic"+str(image)+".jpg"
     camera.capture(name)
 
-# Body
+# Body Loop
 try:
     Initialisation()
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
-        input = input("Enter Y when sample has been loaded")
+        input = input("Enter Y when sample has been loaded\n")
     print("Sample weighs: " + str(MeasureWeight()) + "g")
     print("Starting Process")
     while True:
