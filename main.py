@@ -80,7 +80,7 @@ try:
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
         input = input("Enter Y when sample has been loaded\n")
-    print("Sample weighs: " + str(MeasureWeight()) + "g")
+    print("Sample weighs: "+str(MeasureWeight())+"g")
     print("Starting Process")
     while True:
         if CheckIMU() == 1:
