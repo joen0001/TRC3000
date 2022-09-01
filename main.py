@@ -10,6 +10,7 @@ from hx711 import HX711
 # Look at parallel running of IMU code
 
 # Servo Setup
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
 pwm=GPIO.PWM(11, 50)
@@ -31,7 +32,6 @@ def Initialisation():
     pwm.start(2.5)
     sleep(0.5)
     pwm.ChangeDutyCycle(0)
-    GPIO.setwarnings(False)
     # Load Cell Setup
     hx.reset()
     hx.tare()
@@ -70,7 +70,7 @@ def CheckIMU():
     else:
         return 0
 
-def CameraCapture():
+def CameraCapture(image):
     name = "/home/pi/TRC3000/images/pic"+str(image)+".jpg"
     camera.capture(name)
 
@@ -88,7 +88,8 @@ try:
             break
         if angle % 30 == 0:
             SetAngle(angle)
-            CameraCapture()
+            CameraCapture(image)
+            image += 1
         if angle == 180:
             angle = 0
         angle += 3
