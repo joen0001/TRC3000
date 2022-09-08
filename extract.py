@@ -17,10 +17,11 @@ width,height = im.size
 n = width*height
 pix = im.load()
 
-for p in pix:
-    R += p[0]
-    G += p[1]
-    B += p[2]
+for p in range(n):
+    R += pix[n][0]
+    G += pix[n][1]
+    B += pix[n][2]
+
 R_avg = R/n
 G_avg = G/n
 B_avg = B/n
