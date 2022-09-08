@@ -4,12 +4,13 @@ import numpy as np
 im = Image.open('images/pic0.jpg') # Can be many different formats.
 pix = im.load()
 width,height = im.size  # Get the width and hight of the image for iterating over
+print(im.size)
 
 # #CROP
 BOX_SIZE = 200
 area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
 im = im.crop(area)
-print(pix[0,0])
+print(im.size)
 #avg = np.mean(pix)
 
 im.save('images/adj_pic0.jpg')
