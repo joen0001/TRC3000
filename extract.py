@@ -5,13 +5,9 @@ pix = im.load()
 width,height = im.size  # Get the width and hight of the image for iterating over
 
 # #CROP
-#area = (width/4,height/4,3*width/4,3*height/4)
-#im = im.crop(area)
-
-for i in range(width):
-    for j in range(height):
-        if (width/2-i)**2 > 100 and (height/2-j)**2 > 100:
-            pix[i, j] = (255, 255, 255)
+BOX_SIZE = 200
+area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
+im = im.crop(area)
 
 im.save('images/adj_pic0.jpg')
 
