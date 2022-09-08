@@ -1,6 +1,4 @@
 from PIL import Image
-import numpy as np
-
 
 R = 0
 G = 0
@@ -17,14 +15,16 @@ width,height = im.size
 n = width*height
 pix = im.load()
 
-for p in range(n):
-    R += pix[n][0]
-    G += pix[n][1]
-    B += pix[n][2]
+for i in pix:
+    pixel = pix[i]
+    R += pixel[0]
+    G += pixel[1]
+    B += pixel[2]
 
 R_avg = R/n
 G_avg = G/n
 B_avg = B/n
+
 print(R_avg,G_avg,B_avg)
 for i in range(width):
     for j in range(height):
