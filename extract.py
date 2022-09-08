@@ -1,17 +1,34 @@
 from PIL import Image
 import numpy as np
 
-im = Image.open('images/pic0.jpg') # Can be many different formats.
-pix = im.load()
-width,height = im.size  # Get the width and hight of the image for iterating over
-print(im.size)
 
-# #CROP
+R = 0
+G = 0
+B = 0
 BOX_SIZE = 200
+
+im = Image.open('images/pic0.jpg') # Can be many different formats.
+width,height = im.size  # Get the width and hight of the image for iterating over
+
 area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
 im = im.crop(area)
-print(im.size)
-#avg = np.mean(pix)
+
+width,height = im.size
+n = width*height
+pix = im.load()
+
+for p in pix:
+    R += p[0]
+    G += p[1]
+    B += p[2]
+R_avg = R/n
+G_avg = G/n
+B_avg = B/n
+print(R_avg,G_avg,B_avg)
+for i in range(width):
+    for j in range(height):
+        if i < 10:
+            pix[i,j] = (R_avg,G_avg,B_avg)
 
 im.save('images/adj_pic0.jpg')
 
