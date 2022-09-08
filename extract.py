@@ -22,9 +22,9 @@ for i in range(width):
         G += pixel[1]
         B += pixel[2]
 
-R_avg = R/n
-G_avg = G/n
-B_avg = B/n
+R_avg = round(R/n)
+G_avg = round(G/n)
+B_avg = round(B/n)
 
 print(R_avg,G_avg,B_avg)
 for i in range(width):
