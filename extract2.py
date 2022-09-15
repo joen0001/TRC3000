@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageDraw
 import numpy as np
 
 R = 0
@@ -12,23 +12,19 @@ width,height = im.size  # Get the width and hight of the image for iterating ove
 area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
 crop = im.crop(area)
 
-width,height = crop.size
-n = width*height
-pix = np.array(crop.getdata())
-R = np.mean(pix[:][1])
-G = np.mean(pix[:][1])
-B = np.mean(pix[:][2])
+width_crop,height_crop = crop.size
+n = width_crop*width_crop
+pixel_data = np.array(crop.getdata())
+R = round(np.mean(pixel_data[:][1]))
+G = round(np.mean(pixel_data[:][1]))
+B = round(np.mean(pixel_data[:][2]))
 
-R_avg = round(R/n)
-G_avg = round(G/n)
-B_avg = round(B/n)
+draw = ImageDraw.Draw(im)
+draw.rectangle(width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE, outline=(R,G,B), width=5)
 
-for i in range(width):
-    for j in range(height):
-        if i < 10:
-            pix[i,j] = (R_avg,G_avg,B_avg)
 
-crop.save('images/adj_pic0.jpg')
+
+im.save('images/adj_pic0.jpg')
 
 # Bounding box for specific area
 # Average Pixels to give basic color
