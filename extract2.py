@@ -14,13 +14,19 @@ crop = im.crop(area)
 
 width_crop,height_crop = crop.size
 n = width_crop*width_crop
-pixel_data = np.array(crop.getdata())
-R = round(np.mean(pixel_data[:][0]))
-G = round(np.mean(pixel_data[:][1]))
-B = round(np.mean(pixel_data[:][2]))
-print(pixel_data[0])
+pix = im.load()
 
-print(np.mean(pixel_data[:][0]))
+for i in range(width):
+    for j in range(height):
+        pixel = pix[i,j]
+        R += pixel[0]
+        G += pixel[1]
+        B += pixel[2]
+
+R_avg = round(R/n)
+G_avg = round(G/n)
+B_avg = round(B/n)
+
 draw = ImageDraw.Draw(im)
 draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(0,0,0), width=10)
 
