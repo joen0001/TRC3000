@@ -16,9 +16,9 @@ width,height = crop.size
 n = width*height
 pix = crop.load()
 print(pix[0,0][0])
-R = np.mean(pix[0:,0:][0])
-G = np.mean(pix[0:,0:][1])
-B = np.mean(pix[0:,0:][2])
+R = np.mean(pix[0,0][1])
+G = np.mean(pix[0,:][1])
+B = np.mean(pix[:,:][2])
 
 R_avg = round(R/n)
 G_avg = round(G/n)
