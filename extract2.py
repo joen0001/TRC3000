@@ -14,7 +14,8 @@ crop = im.crop(area)
 
 width,height = crop.size
 n = width*height
-pix = np.array(crop.load())
+pix = crop.load()
+print(pix[0])
 R = np.mean(pix[:,0])
 G = np.mean(pix[:,1])
 B = np.mean(pix[:,2])
