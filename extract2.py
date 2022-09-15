@@ -14,7 +14,7 @@ crop = im.crop(area)
 
 width_crop,height_crop = crop.size
 n = width_crop*width_crop
-pix = im.load()
+pix = crop.load()
 
 for i in range(width_crop):
     for j in range(height_crop):
