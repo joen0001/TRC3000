@@ -9,11 +9,11 @@ im = Image.open('images/pic0.jpg') # Can be many different formats.
 width,height = im.size  # Get the width and hight of the image for iterating over
 
 area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
-crop = im.crop(area)
+im = im.crop(area)
 
-width,height = crop.size
+width,height = im.size
 n = width*height
-pix = crop.load()
+pix = im.load()
 
 for i in range(width):
     for j in range(height):
