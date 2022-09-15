@@ -39,7 +39,7 @@ def extract(image_path, BOX_SIZE=100):
     else:
         colour = 'Clear/White'
 
-    draw.text([width/2-BOX_SIZE,height/2-BOX_SIZE-20], fill=colour, stroke_width=5)
+    draw.text([width/2-BOX_SIZE,height/2-BOX_SIZE-20], text=colour, fill=(R,G,B), stroke_width=5)
 
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
