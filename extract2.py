@@ -45,5 +45,5 @@ def extract(image_path, BOX_SIZE=100):
     new_name = path + 'proc.jpg'
     im.save(new_name)
 
-
-extract('images/pic0.jpg', BOX_SIZE=100)
+extract('images/pic0.jpg')
+extract('images/pic1.jpg')
