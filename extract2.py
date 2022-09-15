@@ -15,7 +15,7 @@ crop = im.crop(area)
 width_crop,height_crop = crop.size
 n = width_crop*width_crop
 pixel_data = np.array(crop.getdata())
-R = round(np.mean(pixel_data[:][1]))
+R = round(np.mean(pixel_data[:][0]))
 G = round(np.mean(pixel_data[:][1]))
 B = round(np.mean(pixel_data[:][2]))
 
