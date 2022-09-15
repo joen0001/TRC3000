@@ -16,8 +16,8 @@ width_crop,height_crop = crop.size
 n = width_crop*width_crop
 pix = im.load()
 
-for i in range(width):
-    for j in range(height):
+for i in range(width_crop):
+    for j in range(height_crop):
         pixel = pix[i,j]
         R += pixel[0]
         G += pixel[1]
