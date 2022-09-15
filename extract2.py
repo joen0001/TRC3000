@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
 def extract(image_path, BOX_SIZE=100):
@@ -39,7 +39,8 @@ def extract(image_path, BOX_SIZE=100):
     else:
         colour = 'Clear/White'
 
-    draw.text([width/2-BOX_SIZE,height/2-BOX_SIZE-20], text=colour, fill=(R,G,B), stroke_width=5)
+    font_size = ImageFont.truetype(size=20)
+    draw.text([width/2-BOX_SIZE,height/2-BOX_SIZE-20], text=colour, font=font_size, fill=(R,G,B))
 
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
