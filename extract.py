@@ -28,9 +28,7 @@ B_avg = round(B/n)
 
 for i in range(width):
     for j in range(height):
-        if abs(pow(i-width,2)) < 10:
-            pix[i,j] = (R_avg,G_avg,B_avg)
-        if abs(pow(j-height,2)) < 10:
+        if i < 10:
             pix[i,j] = (R_avg,G_avg,B_avg)
 
 im.save('images/adj_pic0.jpg')
