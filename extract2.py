@@ -27,8 +27,9 @@ R_avg = round(R/n)
 G_avg = round(G/n)
 B_avg = round(B/n)
 
+print(R_avg,B_avg,G_avg)
 draw = ImageDraw.Draw(im)
-draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
+draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R_avg,B_avg,G_avg), width=10)
 
 
 
