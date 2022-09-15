@@ -4,7 +4,7 @@ import numpy as np
 R = 0
 G = 0
 B = 0
-BOX_SIZE = 200
+BOX_SIZE = 100
 
 im = Image.open('images/pic0.jpg') # Can be many different formats.
 width,height = im.size  # Get the width and hight of the image for iterating over
@@ -28,7 +28,7 @@ G_avg = round(G/n)
 B_avg = round(B/n)
 
 draw = ImageDraw.Draw(im)
-draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(0,0,0), width=10)
+draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
 
 
 
