@@ -46,4 +46,4 @@ def extract(image_path, BOX_SIZE=100):
     im.save(new_name)
 
 
-extract('pic0.jpg', BOX_SIZE=100)
+extract('images/pic0.jpg', BOX_SIZE=100)
