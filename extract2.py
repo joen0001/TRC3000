@@ -20,7 +20,7 @@ G = round(np.mean(pixel_data[:][1]))
 B = round(np.mean(pixel_data[:][2]))
 
 draw = ImageDraw.Draw(im)
-draw.rectangle(width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE, outline=(R,G,B), width=5)
+draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=5)
 
 
 
