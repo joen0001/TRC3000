@@ -18,12 +18,11 @@ pixel_data = np.array(crop.getdata())
 R = round(np.mean(pixel_data[:][0]))
 G = round(np.mean(pixel_data[:][1]))
 B = round(np.mean(pixel_data[:][2]))
-print(R,G,B)
-print('block')
-print(pixel_data[:][0])
+print(pixel_data[0])
+
 print(np.mean(pixel_data[:][0]))
 draw = ImageDraw.Draw(im)
-draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=5)
+draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(0,0,0), width=10)
 
 
 
