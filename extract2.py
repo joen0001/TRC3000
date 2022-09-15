@@ -15,7 +15,7 @@ crop = im.crop(area)
 width,height = crop.size
 n = width*height
 pix = crop.load()
-print(pix.getdata())
+print(crop.getdata())
 R = np.mean(pix[0,0][1])
 print(1)
 G = np.mean(pix[0,:][1])
