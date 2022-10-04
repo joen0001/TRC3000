@@ -8,9 +8,6 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 50):
     area = (width/2-GRID_BOX_SIZE/2,0,width/2+GRID_BOX_SIZE/2,height)
     crop = im.crop(area)
 
-    draw = ImageDraw.Draw(im)
-    draw.rectangle(area, outline=(0,0,0), width=10)
-
     width_crop,height_crop = crop.size
     n = width_crop*height_crop
     pix = crop.load()
@@ -31,11 +28,14 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 50):
             grid_avg = 0
     print(change)
 
+
+    draw = ImageDraw.Draw(im)
+
     height_foam = '2'
     draw.text([0,0], text=height_foam, fill=(0,0,0))
 
     for x in change:
-        draw.line([0,x,width,x])
+        draw.line([0,x,width,x],fill=(0,0,0))
 
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
