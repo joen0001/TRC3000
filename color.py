@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def extract(image_path, BOX_SIZE=200):
+def color(image_path, BOX_SIZE=200):
     BOX_SIZE = BOX_SIZE/2
     R = 0
     G = 0
@@ -46,5 +46,5 @@ def extract(image_path, BOX_SIZE=200):
     im.save(new_name)
     return colour
 
-extract('images/pic0.jpg')
-extract('images/pic1.jpg')
+color('images/pic0.jpg')
+color('images/pic1.jpg')
