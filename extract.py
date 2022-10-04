@@ -39,6 +39,7 @@ def extract(image_path, BOX_SIZE=200,GRID_BOX_SIZE=10,THRESHOLD = 30):
         colour = 'Clear/White'
 
     # FOAMING
+    pix = im.load()
     grid_avg = 0
     mat_avg = []
     change = []
