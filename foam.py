@@ -17,18 +17,20 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 50):
 
     grid_avg = 0
     mat_avg = []
+    change = []
+    current_avg = 0
     for i in range(height_crop):
         pixel = pix[width_crop/2,i]
         grid_avg += sum(pixel)
-        if i%10 ==0:
-            grid_avg = round(grid_avg/(10*3))
+        if i%GRID_BOX_SIZE == 0:
+            grid_avg = round(grid_avg/(GRID_BOX_SIZE*3))
             mat_avg.append(grid_avg)
+            if abs(current_avg-grid_avg) > THRESHOLD:
+                  change.append(i)  
             grid_avg = 0
 
-    print(mat_avg)
 
-
-    height_foam = 2
+    height_foam = '2'
     draw.text([0,0], text=height_foam, fill=(0,0,0))
 
     path, _ = image_path.split(".")
