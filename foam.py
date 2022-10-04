@@ -28,7 +28,7 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 50):
             if abs(current_avg-grid_avg) > THRESHOLD:
                   change.append(i)  
             grid_avg = 0
-
+    print(change)
 
     height_foam = '2'
     draw.text([0,0], text=height_foam, fill=(0,0,0))
