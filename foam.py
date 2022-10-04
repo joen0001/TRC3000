@@ -16,6 +16,7 @@ def foam(image_path, GRID_BOX_SIZE=20, THRESHOLD = 50):
     pix = crop.load()
 
     grid_ind = 0
+    val = 0
     while grid_ind < height//GRID_BOX_SIZE:
         for i in range(GRID_BOX_SIZE*grid_ind,GRID_BOX_SIZE*((grid_ind+1)),1): # Height
             for j in range(GRID_BOX_SIZE):
