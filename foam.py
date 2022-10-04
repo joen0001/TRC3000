@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def foam(image_path, GRID_BOX_SIZE=10, THRESHOLD = 50):
+def foam(image_path, THRESHOLD = 50):
     im = Image.open(image_path) # Can be many different formats.
     width,height = im.size  # Get the width and hight of the image for iterating over
 
@@ -15,14 +15,19 @@ def foam(image_path, GRID_BOX_SIZE=10, THRESHOLD = 50):
     n = width_crop*height_crop
     pix = crop.load()
 
-    grid_ind = 0
-    val = 0
-    while grid_ind*GRID_BOX_SIZE < height//GRID_BOX_SIZE:
-        for i in range(GRID_BOX_SIZE*grid_ind,GRID_BOX_SIZE*((grid_ind+1)),1): # Height
-            pixel = pix[i,width_crop/2]
-            val += sum(pixel)
-        
-    print(val)
+    grid_avg = 0
+    mat_avg = []
+    for i in range(height):
+        pixel = pix[i,width_crop/2]
+        grid_avg += sum(pixel)
+        if i%10 ==0:
+            grid_avg = round(grid_avg/10)
+            mat_avg.append(grid_avg)
+            print(grid_avg)
+            grid_avg = 0
+
+    print(mat_avg)
+
 
     height_foam = 2
     draw.text([0,0], text=height_foam, fill=(0,0,0))
