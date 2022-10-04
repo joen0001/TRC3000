@@ -15,7 +15,7 @@ def foam(image_path,GRID_BOX_SIZE=50, THRESHOLD = 20):
     grid_avg = 0
     mat_avg = []
     change = []
-    current_avg = 0
+    current_avg = 0-THRESHOLD
     for i in range(height_crop):
         for j in range(GRID_BOX_SIZE):
             pixel = pix[j,i]
@@ -24,8 +24,8 @@ def foam(image_path,GRID_BOX_SIZE=50, THRESHOLD = 20):
             grid_avg = round(grid_avg/(pow(GRID_BOX_SIZE,2)*3))
             mat_avg.append(grid_avg)
             if abs(current_avg-grid_avg) > THRESHOLD:
-                  change.append(i)  
-            current_avg = grid_avg
+                change.append(i)  
+                current_avg = grid_avg
             grid_avg = 0
     print(change)
 
