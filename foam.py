@@ -6,6 +6,7 @@ def foam(image_path,GRID_BOX_SIZE=15, THRESHOLD = 15):
     width,height = im.size  # Get the width and hight of the image for iterating over
     pix = im.load()
 
+    grid_avg = 0
     mat_avg = []
     change = []
     current_avg = 0-THRESHOLD
