@@ -17,10 +17,10 @@ def foam(image_path, GRID_BOX_SIZE=10, THRESHOLD = 50):
 
     grid_ind = 0
     val = 0
-    #while grid_ind < height//GRID_BOX_SIZE:
-    for i in range(GRID_BOX_SIZE*grid_ind,GRID_BOX_SIZE*((grid_ind+1)),1): # Height
-        pixel = pix[i,width_crop/2]
-        val += sum(pixel)
+    while grid_ind*GRID_BOX_SIZE < height//GRID_BOX_SIZE:
+        for i in range(GRID_BOX_SIZE*grid_ind,GRID_BOX_SIZE*((grid_ind+1)),1): # Height
+            pixel = pix[i,width_crop/2]
+            val += sum(pixel)
         
     print(val)
 
