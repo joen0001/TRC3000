@@ -17,7 +17,7 @@ def foam(image_path, GRID_BOX_SIZE=50, THRESHOLD = 50):
 
     for i in range(0,height_crop,GRID_BOX_SIZE):
         for j in range(0,height_crop,GRID_BOX_SIZE):
-            print(pix[0:2,0:2])
+            print(pix[0:2])
             grid_sum = sum(pix[i:GRID_BOX_SIZE,j:GRID_BOX_SIZE])
         
 
