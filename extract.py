@@ -69,4 +69,4 @@ def extract(image_path, BOX_SIZE=400,GRID_BOX_SIZE=10,THRESHOLD = 30):
     return colour
 
 extract('images/pic0.jpg')
-#extract('images/pic1.jpg')
+extract('images/pic1.jpg')
