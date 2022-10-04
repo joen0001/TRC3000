@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def foam(image_path,GRID_BOX_SIZE=20, THRESHOLD = 40):
+def foam(image_path,GRID_BOX_SIZE=20, THRESHOLD = 5):
     im = Image.open(image_path) # Can be many different formats.
     width,height = im.size  # Get the width and hight of the image for iterating over
     pix = im.load()
@@ -17,11 +17,11 @@ def foam(image_path,GRID_BOX_SIZE=20, THRESHOLD = 40):
         if i%GRID_BOX_SIZE == 0:
             grid_avg = round(grid_avg/(pow(GRID_BOX_SIZE,2)*3))
             mat_avg.append(grid_avg)
-            print(grid_avg)
             if abs(current_avg-grid_avg) > THRESHOLD:
                 change.append(i)  
                 current_avg = grid_avg
             grid_avg = 0
+    print(mat_avg)
     print(change)
 
     draw = ImageDraw.Draw(im)
