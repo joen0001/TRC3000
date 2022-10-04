@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 10):
+def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 30):
     im = Image.open(image_path) # Can be many different formats.
     width,height = im.size  # Get the width and hight of the image for iterating over
     pix = im.load()
