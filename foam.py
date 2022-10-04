@@ -17,8 +17,8 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 50):
 
     grid_avg = 0
     mat_avg = []
-    for i in range(height):
-        pixel = pix[i,width_crop/2]
+    for i in range(height_crop):
+        pixel = pix[i,0]
         grid_avg += sum(pixel)
         if i%10 ==0:
             grid_avg = round(grid_avg/10)
