@@ -22,6 +22,7 @@ def foam(image_path, GRID_BOX_SIZE=10, THRESHOLD = 50):
             for j in range(GRID_BOX_SIZE):
                 # Count grid x grid size pixel box and average
                 pixel = pix[i,j]
+                print(sum((pixel)))
                 val += sum(pixel)
                 
     print(val)
