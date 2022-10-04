@@ -28,7 +28,7 @@ def foam(image_path,GRID_BOX_SIZE=20, THRESHOLD = 40):
     height_foam = '2'
     draw.text([0,0], text=height_foam, fill=(0,0,0))
     draw.line([width/2,0,width/2,height],fill=(0,0,0))
-    for x in change:
+    for x in change[1:-1]:
         draw.line([0,x,width,x],fill=(0,0,0),width=5)
 
     path, _ = image_path.split(".")
