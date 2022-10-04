@@ -34,6 +34,9 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 50):
     height_foam = '2'
     draw.text([0,0], text=height_foam, fill=(0,0,0))
 
+    for x in change:
+        draw.line([0,x,width,x])
+
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
     im.save(new_name)
