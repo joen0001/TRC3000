@@ -17,9 +17,8 @@ def foam(image_path,GRID_BOX_SIZE=10, THRESHOLD = 30):
             grid_avg = round(grid_avg/(GRID_BOX_SIZE*3))
             mat_avg.append(grid_avg)
             if current_avg > 200 and abs(current_avg-grid_avg) > THRESHOLD:
-                print(current_avg)
                 change.append(i)  
-                current_avg = grid_avg
+            current_avg = grid_avg
             grid_avg = 0
         
     print(change)
