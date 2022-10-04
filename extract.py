@@ -12,7 +12,8 @@ def extract(image_path, BOX_SIZE=200,GRID_BOX_SIZE=10,THRESHOLD = 30):
 
     area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
     crop = im.crop(area)
-    
+    draw = ImageDraw.Draw(im)
+    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
 
     width_crop,height_crop = crop.size
     n = width_crop*height_crop
@@ -56,9 +57,9 @@ def extract(image_path, BOX_SIZE=200,GRID_BOX_SIZE=10,THRESHOLD = 30):
             grid_avg = 0
     
     # DRAWING/OUTPUT
-    draw = ImageDraw.Draw(im)
-    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
+    
     draw.text([0,0], text=colour, fill=(R,G,B))
+
     draw.line([width/2,0,width/2,height],fill=(0,0,0))
     for x in change:
         draw.line([0,x,width,x],fill=(0,0,0),width=10)
