@@ -1,7 +1,8 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def extract(image_path, BOX_SIZE=100):
+def color(image_path, BOX_SIZE=200):
+    BOX_SIZE = BOX_SIZE/2
     R = 0
     G = 0
     B = 0
@@ -11,9 +12,11 @@ def extract(image_path, BOX_SIZE=100):
 
     area = (width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE)
     crop = im.crop(area)
+    draw = ImageDraw.Draw(im)
+    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
 
     width_crop,height_crop = crop.size
-    n = width_crop*width_crop
+    n = width_crop*height_crop
     pix = crop.load()
 
     for i in range(width_crop):
@@ -27,9 +30,6 @@ def extract(image_path, BOX_SIZE=100):
     G = round(G/n)
     B = round(B/n)
 
-    draw = ImageDraw.Draw(im)
-    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
-
     if R > G + B:
         colour = 'Red'
     elif G > R + B:
@@ -39,11 +39,12 @@ def extract(image_path, BOX_SIZE=100):
     else:
         colour = 'Clear/White'
 
-    draw.text([width/2-BOX_SIZE,height/2-BOX_SIZE-20], text=colour, fill=(R,G,B))
+    draw.text([0,0], text=colour, fill=(R,G,B))
 
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
     im.save(new_name)
+    return colour
 
-extract('images/pic0.jpg')
-extract('images/pic1.jpg')
+color('images/pic0.jpg')
+color('images/pic1.jpg')
