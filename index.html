@@ -1,17 +1,20 @@
-<html>
+<!DOCTYPE html>
   <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
     <title>Test Kit</title>
-  </head>
+  </head>  
   <body>
-  <h1>Test Kit</h1>
-  <h3>Functions:</h3>
-  <a href=\A><button>LED1 ON</button></a>
-  <a href=\a><button>LED1 OFF</button></a>
-  <br>
-  <a href=\B><button>LED2 ON</button></a>
-  <a href=\b><button>LED2 OFF</button></a>
-  <br>
-  <a href=\C><button>LED3 ON</button></a>
-  <a href=\c><button>LED3 OFF</button></a>
+    <h1> Test Kit </h1>
+    <h2>Functions:</h2>
+    <form action="/forward/", method="POST">
+      <button name="button" value="b1">LED1 ON123</button>
+      <button name="button" value="b2">LED1 OFF</button>
+      <br>
+      <button name="button" value="b3">LED2 ON</button>
+      <button name="button" value="b4">LED2 OFF</button>
+      <br>
+      <button name="button" value="b5">LED3 ON</button>
+      <button name="button" value="b6">LED3 OFF</button>
+    </form>
   </body>
 </html>
