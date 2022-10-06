@@ -56,7 +56,6 @@ def Initialisation():
     print("Servo Set to position 0\nTare done. Ready for flask")
     # IMU Setup
     MPU_Init()
-    timer = time.time()
 
 def SetAngle(angle):
 	duty = angle/18 + 2.5
@@ -197,6 +196,7 @@ def CameraCapture(image):
 try:
     bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
     DeviceAddress = 0x68
+    timer = time.time()
     Initialisation()
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
