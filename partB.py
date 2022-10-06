@@ -72,8 +72,6 @@ def MeasureWeight():
     return val-60
 
 def MPU_Init():
-    bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
-    DeviceAddress = 0x68
 	#write to sample rate register
     bus.write_byte_data(DeviceAddress, SMPLRT_DIV, 7)
 
@@ -92,19 +90,19 @@ def MPU_Init():
 
 
 def read_raw_data(addr):
-	#Accelero and Gyro value are 16-bit
-    print('2')
-    high = bus.read_byte_data(DeviceAddress, addr)
-    print('2')
-    low = bus.read_byte_data(DeviceAddress, addr+1)
+        #Accelero and Gyro value are 16-bit
+        print('2')
+        high = bus.read_byte_data(DeviceAddress, addr)
+        print('2')
+        low = bus.read_byte_data(DeviceAddress, addr+1)
 
-    #concatenate higher and lower value
-    value = ((high << 8) | low)
+        #concatenate higher and lower value
+        value = ((high << 8) | low)
 
-    #to get signed value from mpu6050
-    if(value > 32768):
-            value = value - 65536
-    return value
+        #to get signed value from mpu6050
+        if(value > 32768):
+                value = value - 65536
+        return value
 
 def IMU_Reading():
     try:
@@ -183,6 +181,8 @@ def CameraCapture(image):
 
 # Body Loop
 try:
+    bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
+    DeviceAddress = 0x68
     Initialisation()
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
