@@ -87,7 +87,9 @@ def MPU_Init():
 
 	#Write to interrupt enable register
     bus.write_byte_data(DeviceAddress, INT_ENABLE, 1)
+    print('0')
     accX = read_raw_data(ACCEL_XOUT_H)
+    print('read raw')
     accY = read_raw_data(ACCEL_YOUT_H)
     accZ = read_raw_data(ACCEL_ZOUT_H)
     if (RestrictPitch):
