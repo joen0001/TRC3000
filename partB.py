@@ -89,21 +89,7 @@ def MPU_Init():
 
 	#Write to interrupt enable register
     bus.write_byte_data(DeviceAddress, INT_ENABLE, 1)
-    accX = read_raw_data(ACCEL_XOUT_H)
-    accY = read_raw_data(ACCEL_YOUT_H)
-    accZ = read_raw_data(ACCEL_ZOUT_H)
-    if (RestrictPitch):
-        roll = math.atan2(accY,accZ) * radToDeg
-        pitch = math.atan(-accX/math.sqrt((accY**2)+(accZ**2))) * radToDeg
-    else:
-        roll = math.atan(accY/math.sqrt((accX**2)+(accZ**2))) * radToDeg
-        pitch = math.atan2(-accX,accZ) * radToDeg
-    kalmanX.setAngle(roll)
-    kalmanY.setAngle(pitch)
-    gyroXAngle = roll
-    gyroYAngle = pitch
-    compAngleX = roll
-    compAngleY = pitch
+
 
 def read_raw_data(addr):
 	#Accelero and Gyro value are 16-bit
@@ -180,8 +166,10 @@ def IMU_Reading():
             gyroXAngle = kalAngleX
         if ((gyroYAngle < -180) or (gyroYAngle > 180)):
             gyroYAngle = kalAngleY
-
-        return(kalAngleX-180,kalAngleY)
+        A_x = accX/16384.0
+        A_y = accX/16384.0
+        A_z = accX/16384.0
+        return(kalAngleX-180,kalAngleY,gyroZ,A_x,A_y,A_z)
     except Exception as exc:
         flag += 1
 
@@ -197,21 +185,44 @@ try:
         input = input("Enter Y when sample has been loaded\n")
     print("Sample weighs: "+str(MeasureWeight())+"g")
     print("Starting Process")
-    while True:
-        if(flag >100):
-            print("There is a problem with the IMU connection")
-            flag=0
-        G_X, G_Y = IMU_Reading()
-        if (G_X or G_Y >= 30):
-            print("Process Stopped: Excessive movement has been detected")
-            break
+    i = 0
+
+    max_G_x = 0
+    max_G_y = 0
+    max_R_z = 0
+    max_A_x = 0
+    max_A_y = 0
+    max_A_z = 0
+
+    while i < 2:
+        G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading()
+        if max_G_x < G_x:
+            max_G_x = G_x
+        if max_G_y < G_y:
+            max_G_y = G_y
+        if max_R_z < R_z:
+            max_R_z = R_z   
+        if max_A_x < A_x:
+            max_A_x = A_x
+        if max_A_y < A_y:
+            max_A_y = A_y
+        if max_A_z < A_z:
+            max_A_z = A_z
+
         if angle % 30 == 0:
             SetAngle(angle)
-            CameraCapture(image)
-            image += 1
+        
         if angle == 180:
             angle = 0
+            i += 1
         angle += 3
         sleep(0.1)
+    
+    print('Maximum Tilt in X: ' + str(max_G_x))
+    print('Maximum Tilt in Y: ' + str(max_G_y))
+    print('Maximum Rotation Acceleration in Z axis: ' + str(max_R_z))
+    print('Maximum Acceleration in X: ' + str(max_A_x))
+    print('Maximum Acceleration in Y: ' + str(max_A_y))
+    print('Maximum Acceleration in Z: ' + str(max_A_z))
 except:
     print('Process Stopped: Interrupted')
