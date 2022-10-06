@@ -127,7 +127,7 @@ def IMU_Reading():
         gyroX = read_raw_data(GYRO_XOUT_H)
         gyroY = read_raw_data(GYRO_YOUT_H)
         gyroZ = read_raw_data(GYRO_ZOUT_H)
-        
+        print('0')
         dt = time.time() - timer
         timer = time.time()
         print('1')
