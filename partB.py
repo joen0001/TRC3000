@@ -56,6 +56,7 @@ def Initialisation():
     print("Servo Set to position 0\nTare done. Ready for flask")
     # IMU Setup
     MPU_Init()
+    timer = time.time()
 
 def SetAngle(angle):
 	duty = angle/18 + 2.5
@@ -102,7 +103,6 @@ def MPU_Init():
     gyroYAngle = pitch
     compAngleX = roll
     compAngleY = pitch
-    timer = time.time()
 
 
 def read_raw_data(addr):
