@@ -96,9 +96,8 @@ def MPU_Init():
     else:
         roll = math.atan(accY/math.sqrt((accX**2)+(accZ**2))) * radToDeg
         pitch = math.atan2(-accX,accZ) * radToDeg
-    
-    timer = time.time()
-    
+    kalmanX.setAngle(roll)
+    kalmanY.setAngle(pitch)
 
 
 def read_raw_data(addr):
@@ -115,12 +114,6 @@ def read_raw_data(addr):
         return value
 
 def IMU_Reading(timer):
-    kalmanX.setAngle(roll)
-    kalmanY.setAngle(pitch)
-    gyroXAngle = roll
-    gyroYAngle = pitch
-    compAngleX = roll
-    compAngleY = pitch
     try:
         accX = read_raw_data(ACCEL_XOUT_H)
         accY = read_raw_data(ACCEL_YOUT_H)
@@ -142,6 +135,10 @@ def IMU_Reading(timer):
             pitch = math.atan2(-accX,accZ) * radToDeg
         gyroXRate = gyroX/131
         gyroYRate = gyroY/131
+        gyroXAngle = roll
+        gyroYAngle = pitch
+        compAngleX = roll
+        compAngleY = pitch 
 
         if (RestrictPitch):
 
