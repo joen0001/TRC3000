@@ -30,13 +30,13 @@ def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     B = round(B/n)
 
     if R > G + B:
-        colour = 'Red'
+        colour = 'Red + ' + str([R,G,B])
     elif G > R + B:
-        colour = 'Green'  
+        colour = 'Green + ' + str([R,G,B])
     elif B > R + G:
-        colour = 'Blue'
+        colour = 'Blue + ' + str([R,G,B])
     else:
-        colour = 'Clear/White'
+        colour = 'Clear/White + ' + str([R,G,B])
 
     # FOAMING
     pix = im.load()
