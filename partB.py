@@ -93,7 +93,9 @@ def MPU_Init():
 
 def read_raw_data(addr):
 	#Accelero and Gyro value are 16-bit
+    print('2')
     high = bus.read_byte_data(DeviceAddress, addr)
+    print('2')
     low = bus.read_byte_data(DeviceAddress, addr+1)
 
     #concatenate higher and lower value
@@ -106,7 +108,9 @@ def read_raw_data(addr):
 
 def IMU_Reading():
     try:
+        print('1')
         accX = read_raw_data(ACCEL_XOUT_H)
+        print('1')
         accY = read_raw_data(ACCEL_YOUT_H)
         accZ = read_raw_data(ACCEL_ZOUT_H)
 
