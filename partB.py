@@ -169,7 +169,6 @@ def IMU_Reading(timer):
             if(abs(kalAngleY)>90):
                 gyroXRate  = -gyroXRate
                 kalAngleX = kalmanX.getAngle(roll,gyroXRate,dt)
-        print(2)
 		#angle = (rate of change of angle) * change in time
         gyroXAngle = gyroXRate * dt
         gyroYAngle = gyroYAngle * dt
