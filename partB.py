@@ -98,6 +98,7 @@ def MPU_Init():
         pitch = math.atan2(-accX,accZ) * radToDeg
     kalmanX.setAngle(roll)
     kalmanY.setAngle(pitch)
+    print('MPU Init Finished')
 
 
 def read_raw_data(addr):
