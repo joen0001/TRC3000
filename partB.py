@@ -129,8 +129,9 @@ def IMU_Reading():
         gyroZ = read_raw_data(GYRO_ZOUT_H)
         print('0')
         dt = time.time() - timer
-        timer = time.time()
         print('1')
+        timer = time.time()
+
         if (RestrictPitch):
             roll = math.atan2(accY,accZ) * radToDeg
             pitch = math.atan(-accX/math.sqrt((accY**2)+(accZ**2))) * radToDeg
