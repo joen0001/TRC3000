@@ -102,7 +102,7 @@ def MPU_Init():
     gyroYAngle = pitch
     compAngleX = roll
     compAngleY = pitch
-    timer = 0
+    
 
 
 def read_raw_data(addr):
@@ -197,6 +197,7 @@ def CameraCapture(image):
 try:
     bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
     DeviceAddress = 0x68
+    timer = 0
     Initialisation()
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
