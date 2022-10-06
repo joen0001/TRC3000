@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def extract(image_path, BOX_SIZE=400,GRID_BOX_SIZE=10,THRESHOLD = 30):
+def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     BOX_SIZE = BOX_SIZE/2
     R = 0
     G = 0
@@ -30,13 +30,13 @@ def extract(image_path, BOX_SIZE=400,GRID_BOX_SIZE=10,THRESHOLD = 30):
     B = round(B/n)
 
     if R > G + B:
-        colour = 'Red'
+        colour = 'Red: ' + str([R,G,B])
     elif G > R + B:
-        colour = 'Green'  
+        colour = 'Green: ' + str([R,G,B])
     elif B > R + G:
-        colour = 'Blue'
+        colour = 'Blue: ' + str([R,G,B])
     else:
-        colour = 'Clear/White'
+        colour = 'Clear/White + ' + str([R,G,B])
 
     # FOAMING
     pix = im.load()
@@ -57,11 +57,12 @@ def extract(image_path, BOX_SIZE=400,GRID_BOX_SIZE=10,THRESHOLD = 30):
     
     # DRAWING/OUTPUT
     draw = ImageDraw.Draw(im)
-    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=10)
+    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(0,0,0), width=4)
+    #draw.line([width/2,0,width/2,height],fill=(0,0,0))
+    #for x in change:
+    #    draw.line([0,x,width,x],fill=(0,0,0),width=4)
+    draw.rectangle([0,0,200,15], (255,255,255), width=-1)
     draw.text([0,0], text=colour, fill=(R,G,B))
-    draw.line([width/2,0,width/2,height],fill=(0,0,0))
-    for x in change:
-        draw.line([0,x,width,x],fill=(0,0,0),width=10)
 
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
