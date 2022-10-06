@@ -127,20 +127,21 @@ def IMU_Reading():
         gyroX = read_raw_data(GYRO_XOUT_H)
         gyroY = read_raw_data(GYRO_YOUT_H)
         gyroZ = read_raw_data(GYRO_ZOUT_H)
-        print('1')
+        
         dt = time.time() - timer
         timer = time.time()
-
+        print('1')
         if (RestrictPitch):
             roll = math.atan2(accY,accZ) * radToDeg
             pitch = math.atan(-accX/math.sqrt((accY**2)+(accZ**2))) * radToDeg
         else:
             roll = math.atan(accY/math.sqrt((accX**2)+(accZ**2))) * radToDeg
             pitch = math.atan2(-accX,accZ) * radToDeg
-
+        print('2')
         gyroXRate = gyroX/131
         gyroYRate = gyroY/131
 
+        print('3')
         if (RestrictPitch):
 
             if((roll < -90 and kalAngleX >90) or (roll > 90 and kalAngleX < -90)):
@@ -166,7 +167,7 @@ def IMU_Reading():
             if(abs(kalAngleY)>90):
                 gyroXRate  = -gyroXRate
                 kalAngleX = kalmanX.getAngle(roll,gyroXRate,dt)
-
+        print('4')
 		#angle = (rate of change of angle) * change in time
         gyroXAngle = gyroXRate * dt
         gyroYAngle = gyroYAngle * dt
@@ -179,6 +180,7 @@ def IMU_Reading():
             gyroXAngle = kalAngleX
         if ((gyroYAngle < -180) or (gyroYAngle > 180)):
             gyroYAngle = kalAngleY
+        print('5')
         A_x = accX/16384.0
         A_y = accX/16384.0
         A_z = accX/16384.0
