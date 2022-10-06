@@ -30,11 +30,11 @@ def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     B = round(B/n)
 
     if R > G + B:
-        colour = 'Red + ' + str([R,G,B])
+        colour = 'Red: ' + str([R,G,B])
     elif G > R + B:
-        colour = 'Green + ' + str([R,G,B])
+        colour = 'Green: ' + str([R,G,B])
     elif B > R + G:
-        colour = 'Blue + ' + str([R,G,B])
+        colour = 'Blue: ' + str([R,G,B])
     else:
         colour = 'Clear/White + ' + str([R,G,B])
 
