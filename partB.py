@@ -183,7 +183,7 @@ def IMU_Reading(timer):
         A_y = accX/16384.0
         A_z = accX/16384.0
         print('5')
-        return(kalAngleX-180,kalAngleY,gyroZ,A_x,A_y,A_z)
+        return kalAngleX-180,kalAngleY,gyroZ,A_x,A_y,A_z
     except Exception as exc:
         flag += 1
 
