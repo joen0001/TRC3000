@@ -212,6 +212,7 @@ try:
 
     while i < 2:
         G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading(timer)
+        print('fin')
         if max_G_x < G_x:
             max_G_x = G_x
         if max_G_y < G_y:
