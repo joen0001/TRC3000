@@ -140,7 +140,7 @@ def IMU_Reading(timer):
         gyroYAngle = pitch
         compAngleX = roll
         compAngleY = pitch 
-
+        print(1)
         if (RestrictPitch):
 
             if((roll < -90 and kalAngleX >90) or (roll > 90 and kalAngleX < -90)):
@@ -166,6 +166,7 @@ def IMU_Reading(timer):
             if(abs(kalAngleY)>90):
                 gyroXRate  = -gyroXRate
                 kalAngleX = kalmanX.getAngle(roll,gyroXRate,dt)
+        print(2)
 		#angle = (rate of change of angle) * change in time
         gyroXAngle = gyroXRate * dt
         gyroYAngle = gyroYAngle * dt
@@ -179,8 +180,6 @@ def IMU_Reading(timer):
         A_x = accX/16384.0
         A_y = accY/16384.0
         A_z = accZ/16384.0
-        print(1)
-        print(A_x,A_y,A_z)
         return kalAngleX-180,kalAngleY,gyroZRate,A_x,A_y,A_z
     except Exception as exc:
         flag += 1
