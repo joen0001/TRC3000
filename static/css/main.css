@@ -9,9 +9,13 @@ h1 {
   text-align: center;
 }
 h2 {
-  color: aquamarine;
+  color:blueviolet;
 }
-
+h3 {
+  color:black;
+  text-align:left;
+  font-size: 30px;
+}
 button {
   background-color: #4CAF50;
   border: none;
@@ -23,8 +27,25 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+
+  width: 10%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: blue; 
 }
 p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -300px;
+  border-style:solid;
+  height:350px;
+  width:600px;
+  color:blueviolet
 }
