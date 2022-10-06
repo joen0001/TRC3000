@@ -183,7 +183,6 @@ def IMU_Reading(timer):
         A_x = accX/16384.0
         A_y = accY/16384.0
         A_z = accZ/16384.0
-        print(kalAngleX-180,kalAngleY,gyroZRate,A_x,A_y,A_z)
         return kalAngleX-180,kalAngleY,gyroZRate,A_x,A_y,A_z
     except Exception as exc:
         flag += 1
@@ -214,17 +213,17 @@ try:
 
     while i < 2:
         G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading(timer)
-        if max_G_x < G_x:
+        if max_G_x < abs(G_x):
             max_G_x = G_x
-        if max_G_y < G_y:
+        if max_G_y < abs(G_y):
             max_G_y = G_y
-        if max_R_z < R_z:
+        if max_R_z < abs(R_z):
             max_R_z = R_z   
-        if max_A_x < A_x:
+        if max_A_x < abs(A_x):
             max_A_x = A_x
-        if max_A_y < A_y:
+        if max_A_y < abs(A_y):
             max_A_y = A_y
-        if max_A_z < A_z:
+        if max_A_z < abs(A_z):
             max_A_z = A_z
 
         if angle % 30 == 0:
@@ -236,11 +235,11 @@ try:
         angle += 3
         sleep(0.1)
     
-    print('Maximum Tilt in X: ' + str(max_G_x))
-    print('Maximum Tilt in Y: ' + str(max_G_y))
-    print('Maximum Rotation Acceleration in Z axis: ' + str(max_R_z))
-    print('Maximum Acceleration in X: ' + str(max_A_x))
-    print('Maximum Acceleration in Y: ' + str(max_A_y))
-    print('Maximum Acceleration in Z: ' + str(max_A_z))
+    print('Maximum Tilt in X: ' + str(round(max_G_x),2) + 'deg')
+    print('Maximum Tilt in Y: ' + str(round(max_G_y),2) + 'deg')
+    print('Maximum Rotation Acceleration in Z axis: ' + str(round(max_R_z),2) + 'deg/s')
+    print('Maximum Acceleration in X: ' + str(round(max_A_x),2) + 'm/s2')
+    print('Maximum Acceleration in Y: ' + str(round(max_A_y),2) + 'm/s2')
+    print('Maximum Acceleration in Z: ' + str(round(max_A_z),2) + 'm/s2')
 except:
     print('Process Stopped: Interrupted')
