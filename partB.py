@@ -135,6 +135,7 @@ def IMU_Reading(timer):
             pitch = math.atan2(-accX,accZ) * radToDeg
         gyroXRate = gyroX/131
         gyroYRate = gyroY/131
+        gyroZRate = gyroZ/131
         gyroXAngle = roll
         gyroYAngle = pitch
         compAngleX = roll
@@ -165,25 +166,22 @@ def IMU_Reading(timer):
             if(abs(kalAngleY)>90):
                 gyroXRate  = -gyroXRate
                 kalAngleX = kalmanX.getAngle(roll,gyroXRate,dt)
-        print('1')
 		#angle = (rate of change of angle) * change in time
         gyroXAngle = gyroXRate * dt
         gyroYAngle = gyroYAngle * dt
-        print('2')
 		#compAngle = constant * (old_compAngle + angle_obtained_from_gyro) + constant * angle_obtained from accelerometer
         compAngleX = 0.93 * (compAngleX + gyroXRate * dt) + 0.07 * roll
         compAngleY = 0.93 * (compAngleY + gyroYRate * dt) + 0.07 * pitch
-        print('3')
         if ((gyroXAngle < -180) or (gyroXAngle > 180)):
             gyroXAngle = kalAngleX
         if ((gyroYAngle < -180) or (gyroYAngle > 180)):
             gyroYAngle = kalAngleY
-        print('4')
         A_x = accX/16384.0
         A_y = accX/16384.0
         A_z = accX/16384.0
-        print('5')
-        return kalAngleX-180,kalAngleY,gyroZ,A_x,A_y,A_z
+        print(kalAngleX-180,kalAngleY,gyroZRate)
+        print(A_x,A_y,A_z)
+        return kalAngleX-180,kalAngleY,gyroZRate,A_x,A_y,A_z
     except Exception as exc:
         flag += 1
 
