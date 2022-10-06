@@ -119,7 +119,7 @@ def read_raw_data(addr):
                 value = value - 65536
         return value
 
-def IMU_Reading():
+def IMU_Reading(timer):
     try:
         accX = read_raw_data(ACCEL_XOUT_H)
         accY = read_raw_data(ACCEL_YOUT_H)
@@ -130,7 +130,7 @@ def IMU_Reading():
         gyroY = read_raw_data(GYRO_YOUT_H)
         gyroZ = read_raw_data(GYRO_ZOUT_H)
 
-        dt = time.time() - 0
+        dt = time.time() - timer
         timer = time.time()
 
         if (RestrictPitch):
@@ -198,6 +198,7 @@ def CameraCapture(image):
 try:
     bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
     DeviceAddress = 0x68
+    timer = time.time()
     Initialisation()
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
@@ -214,7 +215,7 @@ try:
     max_A_z = 0
 
     while i < 2:
-        G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading()
+        G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading(timer)
         if max_G_x < G_x:
             max_G_x = G_x
         if max_G_y < G_y:
