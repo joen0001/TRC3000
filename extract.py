@@ -59,8 +59,8 @@ def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     draw = ImageDraw.Draw(im)
     draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=4)
     draw.line([width/2,0,width/2,height],fill=(0,0,0))
-    for x in change:
-        draw.line([0,x,width,x],fill=(0,0,0),width=4)
+    #for x in change:
+    #    draw.line([0,x,width,x],fill=(0,0,0),width=4)
     draw.text([0,0], text=colour, fill=(R,G,B))
 
     path, _ = image_path.split(".")
