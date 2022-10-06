@@ -87,13 +87,26 @@ def MPU_Init():
 
 	#Write to interrupt enable register
     bus.write_byte_data(DeviceAddress, INT_ENABLE, 1)
+    accX = read_raw_data(ACCEL_XOUT_H)
+    accY = read_raw_data(ACCEL_YOUT_H)
+    accZ = read_raw_data(ACCEL_ZOUT_H)
+    if (RestrictPitch):
+        roll = math.atan2(accY,accZ) * radToDeg
+        pitch = math.atan(-accX/math.sqrt((accY**2)+(accZ**2))) * radToDeg
+    else:
+        roll = math.atan(accY/math.sqrt((accX**2)+(accZ**2))) * radToDeg
+        pitch = math.atan2(-accX,accZ) * radToDeg
+    kalmanX.setAngle(roll)
+    kalmanY.setAngle(pitch)
+    gyroXAngle = roll
+    gyroYAngle = pitch
+    compAngleX = roll
+    compAngleY = pitch
 
 
 def read_raw_data(addr):
         #Accelero and Gyro value are 16-bit
-        print('2')
         high = bus.read_byte_data(DeviceAddress, addr)
-        print('2')
         low = bus.read_byte_data(DeviceAddress, addr+1)
 
         #concatenate higher and lower value
@@ -106,9 +119,7 @@ def read_raw_data(addr):
 
 def IMU_Reading():
     try:
-        print('1')
         accX = read_raw_data(ACCEL_XOUT_H)
-        print('1')
         accY = read_raw_data(ACCEL_YOUT_H)
         accZ = read_raw_data(ACCEL_ZOUT_H)
 
@@ -116,7 +127,7 @@ def IMU_Reading():
         gyroX = read_raw_data(GYRO_XOUT_H)
         gyroY = read_raw_data(GYRO_YOUT_H)
         gyroZ = read_raw_data(GYRO_ZOUT_H)
-
+        print('1')
         dt = time.time() - timer
         timer = time.time()
 
