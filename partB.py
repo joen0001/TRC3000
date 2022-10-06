@@ -210,7 +210,7 @@ try:
     max_A_y = 0
     max_A_z = 0
 
-    while i < 2:
+    while i < 1:
         G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading(timer)
         if max_G_x < abs(G_x):
             max_G_x = G_x
