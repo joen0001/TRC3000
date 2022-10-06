@@ -177,8 +177,9 @@ def IMU_Reading(timer):
         if ((gyroYAngle < -180) or (gyroYAngle > 180)):
             gyroYAngle = kalAngleY
         A_x = accX/16384.0
-        A_y = accX/16384.0
-        A_z = accX/16384.0
+        A_y = accY/16384.0
+        A_z = accZ/16384.0
+        print(1)
         print(A_x,A_y,A_z)
         return kalAngleX-180,kalAngleY,gyroZRate,A_x,A_y,A_z
     except Exception as exc:
