@@ -57,8 +57,8 @@ def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     
     # DRAWING/OUTPUT
     draw = ImageDraw.Draw(im)
-    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(R,G,B), width=4)
-    draw.line([width/2,0,width/2,height],fill=(0,0,0))
+    draw.rectangle([width/2-BOX_SIZE,height/2-BOX_SIZE,width/2+BOX_SIZE,height/2+BOX_SIZE], outline=(0,0,0), width=4)
+    #draw.line([width/2,0,width/2,height],fill=(0,0,0))
     #for x in change:
     #    draw.line([0,x,width,x],fill=(0,0,0),width=4)
     draw.rectangle([0,0,200,15], (255,255,255), width=-1)
