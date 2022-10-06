@@ -102,6 +102,7 @@ def MPU_Init():
     gyroYAngle = pitch
     compAngleX = roll
     compAngleY = pitch
+    timer = time.time()
     
 
 
@@ -129,7 +130,7 @@ def IMU_Reading():
         gyroY = read_raw_data(GYRO_YOUT_H)
         gyroZ = read_raw_data(GYRO_ZOUT_H)
 
-        dt = time.time() - timer
+        dt = time.time() - 0
         timer = time.time()
 
         if (RestrictPitch):
@@ -197,7 +198,6 @@ def CameraCapture(image):
 try:
     bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
     DeviceAddress = 0x68
-    timer = 0
     Initialisation()
     input = input("Enter Y when sample has been loaded")
     while input != 'Y':
