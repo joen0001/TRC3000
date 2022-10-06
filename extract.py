@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-def extract(image_path, BOX_SIZE=400,GRID_BOX_SIZE=10,THRESHOLD = 30):
+def extract(image_path, BOX_SIZE=60,GRID_BOX_SIZE=10,THRESHOLD = 30):
     BOX_SIZE = BOX_SIZE/2
     R = 0
     G = 0
