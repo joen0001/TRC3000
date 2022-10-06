@@ -93,7 +93,6 @@ def MPU_Init():
 
 def read_raw_data(addr):
 	#Accelero and Gyro value are 16-bit
-        print('test')
         high = bus.read_byte_data(DeviceAddress, addr)
         low = bus.read_byte_data(DeviceAddress, addr+1)
 
@@ -103,6 +102,7 @@ def read_raw_data(addr):
         #to get signed value from mpu6050
         if(value > 32768):
                 value = value - 65536
+        print('test')
         return value
 
 def IMU_Reading():
