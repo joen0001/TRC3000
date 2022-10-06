@@ -102,6 +102,7 @@ def MPU_Init():
     gyroYAngle = pitch
     compAngleX = roll
     compAngleY = pitch
+    timer = time.time()
 
 
 def read_raw_data(addr):
@@ -128,8 +129,6 @@ def IMU_Reading():
         gyroY = read_raw_data(GYRO_YOUT_H)
         gyroZ = read_raw_data(GYRO_ZOUT_H)
         print('0')
-        print(time.time())
-        print(timer)
         dt = time.time() - timer
         print('1')
         timer = time.time()

@@ -104,7 +104,6 @@ def MPU_Init():
     gyroYAngle = pitch
     compAngleX = roll
     compAngleY = pitch
-    timer = time.time()
 
 def read_raw_data(addr):
 	#Accelero and Gyro value are 16-bit
