@@ -224,3 +224,5 @@ try:
     print('Maximum Acceleration in X: ' + str(max_A_x))
     print('Maximum Acceleration in Y: ' + str(max_A_y))
     print('Maximum Acceleration in Z: ' + str(max_A_z))
+except:
+    print('Process Stopped: Interrupted')
