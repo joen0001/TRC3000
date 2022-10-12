@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from partB import runall
 #from mainNew import runall
 
 # app = Flask(__name__) # to make the app run without any
@@ -11,19 +12,15 @@ def index():
 @app.route("/forward/", methods=["POST"])
 def button_click():
     if request.form["button"] == "b1":
-        print(1)
+        runall()
     if request.form["button"] == "b2":
         print(2)
     if request.form["button"] == "b3":
         print(3)
     if request.form["button"] == "b4":
         print(4)
-    if request.form["button"] == "b5":
-        print(5)
-    if request.form["button"] == "b6":
-        print(6)
 
     return index()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
