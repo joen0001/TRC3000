@@ -28,15 +28,16 @@ def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     R = round(R/n)
     G = round(G/n)
     B = round(B/n)
+    colour = [R,G,B]
 
-    if R > G + B:
-        colour = 'Red: ' + str([R,G,B])
-    elif G > R + B:
-        colour = 'Green: ' + str([R,G,B])
-    elif B > R + G:
-        colour = 'Blue: ' + str([R,G,B])
-    else:
-        colour = 'Clear/White + ' + str([R,G,B])
+    #if R > G + B:
+    #    colour = 'Red: ' + str([R,G,B])
+    #elif G > R + B:
+    #    colour = 'Green: ' + str([R,G,B])
+    #elif B > R + G:
+    #    colour = 'Blue: ' + str([R,G,B])
+    #else:
+    #    colour = 'Clear/White + ' + str([R,G,B])
 
     # FOAMING
     pix = im.load()
@@ -62,7 +63,7 @@ def extract(image_path, BOX_SIZE=80,GRID_BOX_SIZE=10,THRESHOLD = 25):
     #for x in change:
     #    draw.line([0,x,width,x],fill=(0,0,0),width=4)
     draw.rectangle([0,0,200,15], (255,255,255), width=-1)
-    draw.text([0,0], text=colour, fill=(R,G,B))
+    draw.text([0,0], text=str(colour), fill=(R,G,B))
 
     path, _ = image_path.split(".")
     new_name = path + 'proc.jpg'
