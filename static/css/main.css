@@ -1,51 +1,109 @@
-title{
-    color: #4CAF50;
+* {
+  margin: 0;
+  padding: 0;
 }
-body{
-  background-color:aquamarine;
+title {
+  color: #4caf50;
+}
+body {
+  background-color: #475763;
 }
 h1 {
-  color:black;
+  color: black;
   text-align: center;
 }
+
 h2 {
-  color:blueviolet;
+  color: blueviolet;
 }
+
 h3 {
-  color:black;
-  text-align:left;
+  color: black;
+  text-align: left;
   font-size: 30px;
 }
+
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 25px 6px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  font-size: 23px;
   margin: 4px 2px;
   cursor: pointer;
-
-  width: 10%;
   table-layout: fixed;
   border-collapse: collapse;
-  background-color: blue; 
+  width: 17%;
+  font-weight: bold;
 }
+
 p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
 }
 
 .centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -200px;
-  margin-left: -300px;
-  border-style:solid;
-  height:350px;
-  width:600px;
-  color:blueviolet
+  position: relative;
+  border: 17px solid #000;
+  border-radius: 15px;
+  height: 350px;
+  width: 600px;
+  color: blueviolet;
+  margin: 0 auto;
+  top: -140px;
+}
+
+.form {
+  position: relative;
+  top: 15vh;
+}
+
+.button1,
+.button4 {
+  margin-left: 50px;
+}
+
+.button2,
+.button3 {
+  float: right;
+  margin-right: 50px;
+  background-color: blue;
+}
+
+.button4 {
+  background-color: red;
+}
+
+.button {
+  border-radius: 20px;
+  border: 1.5px solid #000;
+}
+
+.groupButton {
+  margin-bottom: 50px;
+}
+
+.h1 {
+  position: absolute;
+  left: 340px;
+  top: 87px;
+}
+
+.defined {
+  position: relative;
+  top: -130px;
+  left: 340px;
+}
+
+.heading {
+  margin: 10px 0;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  left: 170px;
 }
