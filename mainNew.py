@@ -17,12 +17,14 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
 pwm=GPIO.PWM(11, 50)
 angle = 0
+
 # Load Cell Setup
 referenceUnit = 210.05
 hx = HX711(29, 31)
 hx.set_reading_format("MSB", "MSB")
 hx.set_reference_unit(referenceUnit)
 weight = 0
+
 # IMU Setup
 kalmanX = KalmanAngle()
 kalmanY = KalmanAngle()
@@ -41,6 +43,7 @@ ACCEL_ZOUT_H = 0x3F
 GYRO_XOUT_H  = 0x43
 GYRO_YOUT_H  = 0x45
 GYRO_ZOUT_H  = 0x47
+
 # Camera Setup
 image = 0
 camera = PiCamera()
@@ -57,6 +60,7 @@ def Initialisation():
     # IMU Setup
     MPU_Init()
 
+# Function to set a specified input servo angle
 def SetAngle(angle):
 	duty = angle/18 + 2.5
 	GPIO.output(11, True)
@@ -65,12 +69,14 @@ def SetAngle(angle):
 	GPIO.output(11, False)
 	pwm.ChangeDutyCycle(0)
 
+# Function to return weight minus weight of flask
 def MeasureWeight():
     val = hx.get_weight(5)
     hx.power_down()
     hx.power_up()
     return val-60
 
+# MPU Initialisation
 def MPU_Init():
     bus = smbus.SMBus(1) 	# or bus = smbus.SMBus(0) for older version boards
     DeviceAddress = 0x68
@@ -105,6 +111,7 @@ def MPU_Init():
     compAngleX = roll
     compAngleY = pitch
 
+# Read raw data of IMU
 def read_raw_data(addr):
 	#Accelero and Gyro value are 16-bit
         high = bus.read_byte_data(DeviceAddress, addr)
@@ -118,6 +125,7 @@ def read_raw_data(addr):
                 value = value - 65536
         return value
 
+# Output of Gyroscope Data
 def IMU_Reading():
     try:
         accX = read_raw_data(ACCEL_XOUT_H)
@@ -185,6 +193,7 @@ def IMU_Reading():
     except Exception as exc:
         flag += 1
 
+# Function to set the camera to take an image
 def CameraCapture(image):
     name = "/home/pi/TRC3000/images/pic"+str(image)+".jpg"
     camera.capture(name)
@@ -201,16 +210,20 @@ try:
         if(flag >100):
             print("There is a problem with the IMU connection")
             flag=0
+	# If excessive tilt measured, stop all processes
         G_X, G_Y = IMU_Reading()
         if (G_X or G_Y >= 30):
             print("Process Stopped: Excessive movement has been detected")
             break
+	# At set intervals, change angle and capture image
         if angle % 30 == 0:
             SetAngle(angle)
             CameraCapture(image)
             image += 1
+	# Reset angle after 180deg
         if angle == 180:
             angle = 0
+	# Angle only changed after at every 30deg to allow gyroscope to check tilt more times between rotations
         angle += 3
         sleep(0.1)
 except:
