@@ -12,7 +12,7 @@ def index():
 @app.route("/forward/", methods=["POST"])
 def button_click():
     if request.form["button"] == "b1":
-        runall()
+        print(1)
     if request.form["button"] == "b2":
         print(2)
     if request.form["button"] == "b3":
