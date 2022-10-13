@@ -29,16 +29,8 @@ def color(image_path, BOX_SIZE=200):
     R = round(R/n)
     G = round(G/n)
     B = round(B/n)
-
-    if R > G + B:
-        colour = 'Red'
-    elif G > R + B:
-        colour = 'Green'  
-    elif B > R + G:
-        colour = 'Blue'
-    else:
-        colour = 'Clear/White'
-
+    colour = [R,G,B]
+    
     draw.text([0,0], text=colour, fill=(R,G,B))
 
     path, _ = image_path.split(".")

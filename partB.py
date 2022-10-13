@@ -248,7 +248,7 @@ def runall():
     print('Maximum Acceleration in Y: ' + str(round(max_A_y,5)) + 'm/s2')
     print('Maximum Acceleration in Z: ' + str(round(max_A_z,5)) + 'm/s2')
     print('Colour of AD: ' + str(colour))
-    print('Height of the foam: '+ str(foam_height))
+    print('Height of the foam: '+ str(foam_height) + 'cm')
 
     value_ouput = [MeasureWeight(),colour,foam_height]
     return value_ouput
