@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from partB import runall
+#from partB import runall
 #from mainNew import runall
 
 # app = Flask(__name__) # to make the app run without any

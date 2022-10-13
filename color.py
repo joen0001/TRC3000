@@ -29,9 +29,9 @@ def color(image_path, BOX_SIZE=200):
     R = round(R/n)
     G = round(G/n)
     B = round(B/n)
-    colour = [R,G,B]
+    colour = (R,G,B)
     
-    draw.text([0,0], text=colour, fill=(R,G,B))
+    draw.text([20,20], text=str(colour), fill=(0,0,0))
 
     path, _ = image_path.split(".")
     new_name = path + 'proc_color.jpg'
