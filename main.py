@@ -8,9 +8,9 @@ import sys, math
 from hx711 import HX711
 from color import color
 from foam import foam
+
 # File to Initialise all modules
 # Runs servo movement and corresponding camera
-# Look at parallel running of IMU code
 
 def runall():
     # Servo Setup
@@ -32,6 +32,7 @@ def runall():
     radToDeg = 57.2957786
     kalAngleX = 0
     kalAngleY = 0
+    # IMU Registers
     PWR_MGMT_1   = 0x6B
     SMPLRT_DIV   = 0x19
     CONFIG       = 0x1A
@@ -44,7 +45,6 @@ def runall():
     GYRO_YOUT_H  = 0x45
     GYRO_ZOUT_H  = 0x47
     # Camera Setup
-    image = 0
     camera = PiCamera()
 
     def Initialisation():
@@ -59,6 +59,7 @@ def runall():
         # IMU Setup
         MPU_Init()
 
+    # Function to set a desired angle of servo
     def SetAngle(angle):
         duty = angle/18 + 2.5
         GPIO.output(11, True)
@@ -67,12 +68,14 @@ def runall():
         GPIO.output(11, False)
         pwm.ChangeDutyCycle(0)
 
+    # Function to measure weight - 60g (weight of empty flask)
     def MeasureWeight():
         val = hx.get_weight(5)
         hx.power_down()
         hx.power_up()
         return val-60
 
+    # Initialising IMU/MPU
     def MPU_Init():
         #write to sample rate register
         bus.write_byte_data(DeviceAddress, SMPLRT_DIV, 7)
@@ -102,7 +105,7 @@ def runall():
         kalmanY.setAngle(pitch)
         print('MPU Init Finished')
 
-
+    # Read raw data coming from given address of IMU
     def read_raw_data(addr):
         #Accelero and Gyro value are 16-bit
         high = bus.read_byte_data(DeviceAddress, addr)
@@ -116,6 +119,7 @@ def runall():
                 value = value - 65536
         return value
 
+    # Kalman Filter to give the specified X and Y tilt, as well as other acceleration values
     def IMU_Reading(timer):
         accX = read_raw_data(ACCEL_XOUT_H)
         accY = read_raw_data(ACCEL_YOUT_H)
@@ -186,14 +190,14 @@ def runall():
         A_z = accZ/16384.0
         return kalAngleX-180,kalAngleY,gyroZRate,A_x,A_y,A_z
 
+    # Function to take an image
     def CameraCapture(index_img):
         name = "/home/pi/TRC3000/images/pic"+str(index_img)+".jpg"
         camera.capture(name)
         return name
 
     # Body Loop
-
-    bus = smbus.SMBus(1)    # or bus = smbus.SMBus(0) for older version boards
+    bus = smbus.SMBus(1) 
     DeviceAddress = 0x68
     timer = time.time()
     Initialisation()
@@ -212,8 +216,16 @@ def runall():
     max_A_y = 0
     max_A_z = 0
 
+    # Amount of times to be looped
     while i < 1:
+        
         G_x,G_y,R_z,A_x,A_y,A_z = IMU_Reading(timer)
+        if (G_x or G_y >= 30):
+            print("Process Stopped: Excessive movement has been detected")
+            break
+
+        # Storing the maximum acceleration, etc. for Part B
+        # Comment out for normal use
         if max_G_x < abs(G_x):
             max_G_x = G_x
         if max_G_y < abs(G_y):
@@ -227,20 +239,22 @@ def runall():
         if max_A_z < abs(A_z):
             max_A_z = A_z
 
+        # Only rotate and take picture at set intervals
         if angle % 30 == 0:
             SetAngle(angle)
             pic_name = CameraCapture(j)
             colour = color(pic_name)
             foam_height = foam(pic_name)
             j +=1
-            
+        
+        # If reached end of rotation, reset
         if angle == 180:
             angle = 0
             i += 1
         angle += 3
         sleep(0.1)
             
-            
+    # Output information        
     print('Maximum Tilt in X: ' + str(round(max_G_x,2))+ 'deg')
     print('Maximum Tilt in Y: ' + str(round(max_G_y,2)) + 'deg')
     print('Maximum Rotation Acceleration in Z axis: ' + str(round(max_R_z,2)) + 'deg/s')
@@ -253,4 +267,4 @@ def runall():
     value_ouput = [MeasureWeight(),colour,foam_height]
     return value_ouput
 
-abc = runall()
+test = runall()

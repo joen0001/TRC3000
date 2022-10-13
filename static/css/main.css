@@ -45,7 +45,7 @@ p {
 }
 
 .centered {
-  position: relative;
+  position: centre;
   border: 17px solid #000;
   border-radius: 15px;
   height: 350px;

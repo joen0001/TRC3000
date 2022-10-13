@@ -1,24 +1,29 @@
-from flask import Flask, render_template, request
-#from partB import runall
-#from mainNew import runall
+# Code to run the local host/server 
 
-# app = Flask(__name__) # to make the app run without any
+from flask import Flask, render_template, request
+from main import Initialisation, runall, emergency_stop, power_off
+
 app = Flask(__name__, template_folder=".", static_folder="static")
 
 @app.route("/")
 def index():
     return render_template("index.html")
-    
+
+# Assigning Functions to each button    
 @app.route("/forward/", methods=["POST"])
 def button_click():
+    # Start
     if request.form["button"] == "b1":
-        print(1)
+        runall()
+    # Stop
     if request.form["button"] == "b2":
-        print(2)
+        emergency_stop(2)
+    # Calibration
     if request.form["button"] == "b3":
-        print(3)
+        Initialisation(3)
+    # Power off
     if request.form["button"] == "b4":
-        print(4)
+        power_off(4)
 
     return index()
 
